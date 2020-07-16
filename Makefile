@@ -27,3 +27,4 @@ all: $(EXE)
 
 clean:
 	rm -f -v *~ *.vcd $(OBJECTS) $(EXE) core
+
