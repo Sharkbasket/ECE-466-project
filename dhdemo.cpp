@@ -21,7 +21,6 @@ int sc_main(int argc , char *argv[]) {
   DH_SW.from_hw(ch4);                // input from hardware
   DH_SW.hw_enable(enable);           // hardware-enable output
   DH_SW.hw_done(done);               // hardware-done input
-  DH_SW.clock(clock);                // hardware clock
   
   dh_hw DH_HW("DH_Hardware_Module");
   DH_HW.from_sw0(ch0);               // input0 from software
@@ -31,7 +30,8 @@ int sc_main(int argc , char *argv[]) {
   DH_HW.to_sw(ch4);                  // output to software
   DH_HW.hw_enable(enable);           // hardware-enable input
   DH_HW.hw_done(done);               // hardware-done output
-  
+  DH_HW.clock(clock);                // hardware clock
+
   sc_start();
   
   return(0);
