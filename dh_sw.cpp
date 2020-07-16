@@ -471,6 +471,12 @@ NN_DIGIT c
   to_hw2.write(c);
   to_hw3.write(aLow);
   
+  // Handshaking protocol
+  hw_enable->write(true);
+  wait(); // Wait for assertion of hw_done
+  hw_enable->write(false);
+  wait(); // Wait for de-assertion of hw_done
+  
 // This computation is now performed in hardware.
 /* Synchronization is done via blocking read/write 
    (to be replaced by handshaking). */
