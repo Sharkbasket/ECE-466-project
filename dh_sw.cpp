@@ -482,7 +482,7 @@ NN_DIGIT c
    (to be replaced by handshaking). */
 /*
   NN_DIGIT cLow, cHigh, u, v;
-
+  
   cHigh = (NN_HALF_DIGIT)HIGH_HALF (c);
   cLow = (NN_HALF_DIGIT)LOW_HALF (c);
   
@@ -494,16 +494,16 @@ NN_DIGIT c
   if ((t[0] -= TO_HIGH_HALF (v)) > (MAX_NN_DIGIT - TO_HIGH_HALF (v)))
     t[1]--;
   t[1] -= HIGH_HALF (v);
-
+  
   while ((t[1] > 0) || ((t[1] == 0) && t[0] >= c)) {
     if ((t[0] -= c) > (MAX_NN_DIGIT - c))
       t[1]--;
     aLow++;
   }
 */
-
+  
   aLow = from_hw.read(); 
-     
+  
 }
 
 

@@ -247,22 +247,21 @@ typedef struct {
 
 /*********************************************************************/
 
-SC_MODULE (dh_sw)
-{
-  sc_fifo_out <NN_DIGIT> to_hw0, to_hw1, to_hw2;
-  sc_fifo_out <NN_HALF_DIGIT> to_hw3;
-  sc_fifo_in <NN_HALF_DIGIT> from_hw;
-
+SC_MODULE (dh_sw) {
+  sc_out <NN_DIGIT> to_hw0, to_hw1, to_hw2;
+  sc_out <NN_HALF_DIGIT> to_hw3;
+  sc_in <NN_HALF_DIGIT> from_hw;
+  
   sc_in <bool> hw_done; 
   sc_out <bool> hw_enable;
-
+  
   void process_sw();
   
   SC_CTOR (dh_sw) {
     SC_THREAD (process_sw);
     sensitive << hw_done;
   }
-
+  
 /*********************************************************************/
 
   void R_memset (POINTER, int, unsigned int);
