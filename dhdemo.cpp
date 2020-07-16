@@ -4,8 +4,8 @@
 #include "dh_hw.h"
 
 int sc_main(int argc , char *argv[]) {
-  sc_signal <NN_DIGIT> ch0(1), ch1(1), ch2(1);
-  sc_signal <NN_HALF_DIGIT> ch3(1), ch4(1);
+  sc_signal <NN_DIGIT> ch0, ch1, ch2;
+  sc_signal <NN_HALF_DIGIT> ch3, ch4;
   
   sc_signal <bool> enable, done;
   enable.write(false);
