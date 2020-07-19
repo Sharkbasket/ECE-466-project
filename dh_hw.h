@@ -20,7 +20,6 @@ SC_MODULE (dh_hw) {
     SC_THREAD (process_hw);
     sensitive << clock.pos();
   }
-  
 };
 
 #endif /* end _DH_HW_H_ */

@@ -8,13 +8,13 @@ void dh_hw::process_hw() {
   
   for (;;) {
     if (hw_enable->read() == true) {
-      // Read inputs (blocking FIFO access)
+      // Read inputs
       t[0] = from_sw0.read();
       t[1] = from_sw1.read();
       c = from_sw2.read();
       aLow = from_sw3.read();
       
-      // Original code from NN_DigitDivLH():	
+      // Original code from NN_DigitDivLH():
       
       /*** Required part (to do: Datapath + Control) ***/
       cHigh = (NN_HALF_DIGIT)HIGH_HALF (c);
@@ -33,7 +33,7 @@ void dh_hw::process_hw() {
         aLow++;
       }
     
-      // Write outputs (blocking FIFO access)
+      // Write outputs
       to_sw.write(aLow);
       
       // Handshaking protocol
