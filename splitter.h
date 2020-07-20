@@ -16,7 +16,7 @@ SC_MODULE(splitter_32to16) {
   }
   
   void split() {
-    <NN_DIGIT> input = in->read();
+    NN_DIGIT input = in->read();
     low_half->write((NN_HALF_DIGIT)LOW_HALF(input));
     high_half->write((NN_HALF_DIGIT)HIGH_HALF(input));
   }
