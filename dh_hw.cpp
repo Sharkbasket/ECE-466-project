@@ -5,7 +5,8 @@
 SC_HAS_PROCESS(dh_hw);
 
 dh_hw::dh_hw(sc_module_name n)
-: sc_module(n), bonus_module("bonus_module"), controller("controller") {
+: sc_module(n), bonus_module("bonus_module"), controller("controller"),
+  splitter("splitter") {
   SC_THREAD(process_hw);
   sensitive << clock.pos();
   
@@ -27,25 +28,29 @@ dh_hw::dh_hw(sc_module_name n)
   controller.bonus_ready(bonus_ready);
   controller.ld_output(ld_output);
   controller.hw_done(hw_done);
+  
+  splitter.in(c_reg_out);
+  splitter.low_half(cLow_sig);
+  splitter.high_half(cHigh_sig);
 }
 
 void dh_hw::process_hw() {
   NN_DIGIT t[2] {0, 0}, c(0), u(0), v(0), t0_tmp(0),
            t0_new(0), t1_tmp0(0), t1_tmp1(0), t1_new(0);
-  NN_HALF_DIGIT aLow(0), cLow(0), cHigh(0), aLow_new(0);
+  NN_HALF_DIGIT aLow(0), aLow_new(0);
   
   while (true) {
     if (ld_inputs.read() == true) {
       t[0] = from_sw0->read();
       t[1] = from_sw1->read();
-      c = from_sw2->read();
+      
+      c_reg_out.write(from_sw2->read());
+      wait(); // Need to wait for splitter outputs to be updated
+      
       aLow = from_sw3->read();
-      
-      cHigh = (NN_HALF_DIGIT)HIGH_HALF (c);
-      cLow = (NN_HALF_DIGIT)LOW_HALF (c);
-      
-      u = (NN_DIGIT)aLow * (NN_DIGIT)cLow;
-      v = (NN_DIGIT)aLow * (NN_DIGIT)cHigh;
+
+      u = (NN_DIGIT)aLow * (NN_DIGIT)cLow_sig.read();
+      v = (NN_DIGIT)aLow * (NN_DIGIT)cHigh_sig.read();
     }
     
     if (ld_t0_tmp.read() == true) {

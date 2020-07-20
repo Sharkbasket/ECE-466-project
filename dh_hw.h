@@ -5,6 +5,7 @@
 #include "digit.h"
 #include "bonus.h"
 #include "fsm_ctrl.h"
+#include "splitter.h"
 
 SC_MODULE(dh_hw) {
   // Ports
@@ -18,6 +19,8 @@ SC_MODULE(dh_hw) {
   sc_in_clk clock;
   sc_signal<NN_DIGIT> bonus_in0, bonus_in1;
   sc_signal<NN_HALF_DIGIT> bonus_out;
+  sc_signal<NN_DIGIT> c_reg_out;
+  sc_signal<NN_HALF_DIGIT> cLow_sig, cHigh_sig;
   
   // Internal control signals
   sc_signal<bool> ld_inputs, ld_t0_tmp, ld_t1_tmp0, ld_t0_new,
@@ -26,6 +29,7 @@ SC_MODULE(dh_hw) {
   // Submodule declarations
   bonus bonus_module;
   fsm_ctrl controller;
+  splitter_32to16 splitter;
   
   // Constructor
   dh_hw(sc_module_name);
