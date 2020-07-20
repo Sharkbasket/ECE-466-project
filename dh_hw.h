@@ -17,10 +17,14 @@ SC_MODULE(dh_hw) {
   sc_in_clk clock;
   sc_signal<NN_DIGIT> bonus_in0, bonus_in1;
   sc_signal<NN_HALF_DIGIT> bonus_out;
-  sc_signal<bool> bonus_ready;
+  
+  // Internal control signals
+  sc_signal<bool> ld_inputs, ld_t0_tmp, ld_t1_tmp0, ld_t0_new,
+                  ld_t1_tmp1, ld_t1_new, bonus_ready, ld_output;
   
   // Submodule declarations
   bonus bonus_module;
+  fsm_ctrl controller;
   
   // Constructor
   dh_hw(sc_module_name);
