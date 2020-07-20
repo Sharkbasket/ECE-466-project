@@ -35,11 +35,11 @@ void dh_hw::process_hw() {
   NN_HALF_DIGIT aLow(0), cLow(0), cHigh(0), aLow_new(0);
   
   while (true) {
-    if (ld_inputs->read() == true) {
-      t[0] = from_sw0.read();
-      t[1] = from_sw1.read();
-      c = from_sw2.read();
-      aLow = from_sw3.read();
+    if (ld_inputs.read() == true) {
+      t[0] = from_sw0->read();
+      t[1] = from_sw1->read();
+      c = from_sw2->read();
+      aLow = from_sw3->read();
       
       cHigh = (NN_HALF_DIGIT)HIGH_HALF (c);
       cLow = (NN_HALF_DIGIT)LOW_HALF (c);
@@ -48,11 +48,11 @@ void dh_hw::process_hw() {
       v = (NN_DIGIT)aLow * (NN_DIGIT)cHigh;
     }
     
-    if (ld_t0_tmp->read() == true) {
+    if (ld_t0_tmp.read() == true) {
       t0_tmp = t[0] - u;
     }
     
-    if (ld_t1_tmp0->read() == true) {
+    if (ld_t1_tmp0.read() == true) {
       if (t0_tmp > (MAX_NN_DIGIT - u)) {
         t1_tmp0 = t[1] - 1;
       } else {
@@ -60,12 +60,12 @@ void dh_hw::process_hw() {
       }
     }
     
-    if (ld_t0_new->read() == true) {
+    if (ld_t0_new.read() == true) {
       t0_new = t0_tmp - TO_HIGH_HALF(v);
       bonus_in0.write(t0_new);
     }
     
-    if (ld_t1_tmp1->read() == true) {
+    if (ld_t1_tmp1.read() == true) {
       if (t0_new > (MAX_NN_DIGIT - TO_HIGH_HALF(v))) {
         t1_tmp1 = t1_tmp0 - 1;
       } else {
@@ -73,14 +73,14 @@ void dh_hw::process_hw() {
       }
     }
     
-    if (ld_t1_new->read() == true) {
+    if (ld_t1_new.read() == true) {
       t1_new = t1_tmp1 - HIGH_HALF(v);
       bonus_in1.write(t1_new);
     }
     
-    if (ld_output->read() == true) {
+    if (ld_output.read() == true) {
       aLow_new = bonus_out.read();
-      to_sw.write(aLow_new);
+      to_sw->write(aLow_new);
     }
     
     wait();

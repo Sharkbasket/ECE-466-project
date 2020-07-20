@@ -8,7 +8,7 @@ SC_MODULE(fsm_ctrl) {
   // Define states
   enum State {
     RESET, WAIT, INPUT, EXE_0, EXE_1, EXE_2, EXE_3, EXE_4, EXE_5, OUTPUT, DONE
-  }
+  };
   
   // Ports
   sc_in_clk clock;

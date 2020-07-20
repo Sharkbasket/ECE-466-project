@@ -4,6 +4,7 @@
 #include "systemc.h"
 #include "digit.h"
 #include "bonus.h"
+#include "fsm_ctrl.h"
 
 SC_MODULE(dh_hw) {
   // Ports
