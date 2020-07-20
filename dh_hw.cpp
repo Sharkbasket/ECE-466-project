@@ -35,8 +35,8 @@ dh_hw::dh_hw(sc_module_name n)
 }
 
 void dh_hw::process_hw() {
-  NN_DIGIT t[2] {0, 0}, c(0), u(0), v(0), t0_tmp(0),
-           t0_new(0), t1_tmp0(0), t1_tmp1(0), t1_new(0);
+  NN_DIGIT t[2] {0, 0}, u(0), v(0), t0_tmp(0), t0_new(0), t1_tmp0(0),
+           t1_tmp1(0), t1_new(0);
   NN_HALF_DIGIT aLow(0), aLow_new(0);
   
   while (true) {
