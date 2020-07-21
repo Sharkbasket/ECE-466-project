@@ -6,6 +6,7 @@
 #include "bonus.h"
 #include "fsm_ctrl.h"
 #include "splitter.h"
+#include "simple_reg.h"
 #include "multiplier.h"
 #include "subtractor.h"
 #include "comparator.h"
@@ -69,8 +70,8 @@ SC_MODULE(dh_hw) {
   sc_signal<NN_DIGIT> Rshift_out_sig;
     
   // Constant signals
-  sc_signal<NN_DIGIT> const_max_sig(MAX_NN_DIGIT);
-  sc_signal<NN_DIGIT> const_1_sig(1);
+  sc_signal<NN_DIGIT> const_max_sig;
+  sc_signal<NN_DIGIT> const_1_sig;
   
    /*** Internal control signals ***/
   sc_in_clk clock;

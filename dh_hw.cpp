@@ -39,6 +39,10 @@ dh_hw::dh_hw(sc_module_name n)
 //   SC_THREAD(process_hw);
 //   sensitive << clock.pos();
   
+  // Initialize constants
+  const_max_sig.write(MAX_NN_DIGIT);
+  const_1_sig.write(1);
+  
   /*** Module interconnection ***/
   bonus_module.t0_new_sig(t0_new_reg_out_sig);
   bonus_module.t1_new_sig(t1_new_reg_out_sig);
