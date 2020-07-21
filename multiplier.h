@@ -4,7 +4,6 @@
 #include "systemc.h"
 
 SC_MODULE(multiplier) {
-  // Ports
   sc_in<NN_HALF_DIGIT> factor0;
   sc_in<NN_HALF_DIGIT> factor1;
   sc_out<NN_DIGIT> product;

@@ -8,12 +8,12 @@ SC_MODULE(comparator) {
   sc_in<T> a;
   sc_in<T> b;
   sc_out<bool> out;
-
+  
   SC_CTOR(comparator) {
     SC_METHOD(compare);
     sensitive << a << b;
   }
-
+  
   void compare() {
     out->write(a->read() > b->read());
   }

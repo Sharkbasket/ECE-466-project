@@ -9,12 +9,12 @@ SC_MODULE(multiplexer) {
   sc_in<T> in1;
   sc_in<bool> select;
   sc_out<T> out;
-
+  
   SC_CTOR(multiplexer) {
     SC_METHOD(mux_it);
     sensitive << in0 << in1 << select;
   }
-
+  
   void mux_it() {
     if (select->read() == false) {
       out->write(in0->read());

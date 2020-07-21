@@ -28,7 +28,6 @@ SC_MODULE(bonus_module) {
         }
         aLow++;
       }
-      
       aLow_new_sig->write(aLow);
     }
   }

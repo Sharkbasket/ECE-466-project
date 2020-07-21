@@ -5,11 +5,9 @@
 #include "digit.h"
 
 SC_MODULE(splitter_32to16) {
-  // Ports
   sc_in<NN_DIGIT> in;
   sc_out<NN_HALF_DIGIT> low_half, high_half;
   
-  // Constructor
   SC_CTOR(splitter_32to16) {
     SC_METHOD(split);
     sensitive << in;
