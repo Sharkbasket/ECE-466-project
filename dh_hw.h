@@ -116,8 +116,8 @@ SC_MODULE(dh_hw) {
   comparator<NN_DIGIT> cmp_0;
   comparator<NN_DIGIT> cmp_1;
   
-  multiplexer<NN_DIGIT> mux_0;
-  multiplexer<NN_DIGIT> mux_1;
+  multiplexer mux_0;
+  multiplexer mux_1;
   
   left_shifter Lshift;
   right_shifter Rshift;

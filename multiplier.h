@@ -3,20 +3,19 @@
 
 #include "systemc.h"
 
-template<class T>
 SC_MODULE(multiplier) {
   // Ports
-  sc_in<T> factor0;
-  sc_in<T> factor1;
-  sc_out<T> product;
-
+  sc_in<NN_HALF_DIGIT> factor0;
+  sc_in<NN_HALF_DIGIT> factor1;
+  sc_out<NN_DIGIT> product;
+  
   SC_CTOR(multiplier) {
     SC_METHOD(multiply);
     sensitive << factor0 << factor1;
   }
-
+  
   void multiply() {
-    product->write(factor0->read() * factor1->read());
+    product->write((NN_DIGIT)factor0->read() * (NN_DIGIT)factor1->read());
   }
 };
 

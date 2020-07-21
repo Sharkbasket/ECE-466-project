@@ -24,4 +24,4 @@ SC_MODULE(multiplexer) {
   }
 };
 
-#endif MULTIPLEXER_H
+#endif // MULTIPLEXER_H
