@@ -3,7 +3,7 @@
 
 #include "systemc.h"
 #include "digit.h"
-#include "bonus.h"
+#include "bonus_module.h"
 #include "fsm_ctrl.h"
 #include "splitter.h"
 #include "simple_reg.h"
@@ -15,7 +15,10 @@
 #include "right_shifter.h"
 
 SC_MODULE(dh_hw) {
-  // Ports
+  // Constructor declaration
+  dh_hw(sc_module_name);
+  
+  // Port declarations
   sc_in<NN_DIGIT> from_sw0;
   sc_in<NN_DIGIT> from_sw1;
   sc_in<NN_DIGIT> from_sw2;
@@ -24,8 +27,46 @@ SC_MODULE(dh_hw) {
   sc_in<bool> hw_enable;
   sc_out<bool> hw_done;
   
-  /*** Internal data signals ***/
+  // Start of submodule declarations
+  bonus_module bonus;
   
+  fsm_ctrl controller;
+  
+  splitter_32to16 splitter;
+  
+  simple_reg<NN_DIGIT> t0_reg;
+  simple_reg<NN_DIGIT> t0_tmp_reg;
+  simple_reg<NN_DIGIT> t0_new_reg;
+  simple_reg<NN_DIGIT> t1_reg;
+  simple_reg<NN_DIGIT> t1_tmp0_reg;
+  simple_reg<NN_DIGIT> t1_tmp1_reg;
+  simple_reg<NN_DIGIT> t1_new_reg;
+  simple_reg<NN_DIGIT> c_reg;
+  simple_reg<NN_HALF_DIGIT> aLow_reg;
+  simple_reg<NN_HALF_DIGIT> aLow_new_reg;
+  
+  multiplier mult_0;
+  multiplier mult_1;
+  
+  subtractor<NN_DIGIT> sub_0;
+  subtractor<NN_DIGIT> sub_1;
+  subtractor<NN_DIGIT> sub_2;
+  subtractor<NN_DIGIT> sub_3;
+  subtractor<NN_DIGIT> sub_4;
+  subtractor<NN_DIGIT> sub_5;
+  subtractor<NN_DIGIT> sub_6;
+  
+  comparator<NN_DIGIT> cmp_0;
+  comparator<NN_DIGIT> cmp_1;
+  
+  multiplexer<NN_DIGIT> mux_0;
+  multiplexer<NN_DIGIT> mux_1;
+  
+  left_shifter Lshift;
+  right_shifter Rshift;
+  // End of submodule declarations
+  
+  // Start of internal signal declarations  
   // Bonus module output
   sc_signal<NN_HALF_DIGIT> bonus_out_sig;
   
@@ -73,7 +114,7 @@ SC_MODULE(dh_hw) {
   sc_signal<NN_DIGIT> const_max_sig;
   sc_signal<NN_DIGIT> const_1_sig;
   
-   /*** Internal control signals ***/
+  // Internal control signals
   sc_in_clk clock;
   sc_signal<bool> ld_inputs;
   sc_signal<bool> ld_t0_tmp;
@@ -83,50 +124,7 @@ SC_MODULE(dh_hw) {
   sc_signal<bool> ld_t1_new;
   sc_signal<bool> bonus_ready;
   sc_signal<bool> ld_output;
-  
- /*** Submodule declarations ***/
-  bonus bonus_module;
-  
-  fsm_ctrl controller;
-  
-  splitter_32to16 splitter;
-  
-  simple_reg<NN_DIGIT> t0_reg;
-  simple_reg<NN_DIGIT> t0_tmp_reg;
-  simple_reg<NN_DIGIT> t0_new_reg;
-  simple_reg<NN_DIGIT> t1_reg;
-  simple_reg<NN_DIGIT> t1_tmp0_reg;
-  simple_reg<NN_DIGIT> t1_tmp1_reg;
-  simple_reg<NN_DIGIT> t1_new_reg;
-  simple_reg<NN_DIGIT> c_reg;
-  simple_reg<NN_HALF_DIGIT> aLow_reg;
-  simple_reg<NN_HALF_DIGIT> aLow_new_reg;
-  
-  multiplier mult_0;
-  multiplier mult_1;
-  
-  subtractor<NN_DIGIT> sub_0;
-  subtractor<NN_DIGIT> sub_1;
-  subtractor<NN_DIGIT> sub_2;
-  subtractor<NN_DIGIT> sub_3;
-  subtractor<NN_DIGIT> sub_4;
-  subtractor<NN_DIGIT> sub_5;
-  subtractor<NN_DIGIT> sub_6;
-  
-  comparator<NN_DIGIT> cmp_0;
-  comparator<NN_DIGIT> cmp_1;
-  
-  multiplexer<NN_DIGIT> mux_0;
-  multiplexer<NN_DIGIT> mux_1;
-  
-  left_shifter Lshift;
-  right_shifter Rshift;
-  
-  // Constructor
-  dh_hw(sc_module_name);
-  
-  // Processes
-//   void process_hw();
+  // End of internal signal declarations
 };
 
 #endif /* end _DH_HW_H_ */

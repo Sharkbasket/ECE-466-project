@@ -5,9 +5,9 @@
 SC_HAS_PROCESS(dh_hw);
 
 dh_hw::dh_hw(sc_module_name n)
-/*** Initializer list ***/
+// Initializer list
 : sc_module(n),
-  bonus_module("bonus_module"),
+  bonus("bonus"),
   controller("controller"),
   splitter("splitter"),
   t0_reg("t0_reg"),
@@ -34,22 +34,19 @@ dh_hw::dh_hw(sc_module_name n)
   mux_0("mux_0"),
   mux_1("mux_1"),
   Lshift("Lshift"),
-  Rshift("Rshift")
-{  
-//   SC_THREAD(process_hw);
-//   sensitive << clock.pos();
+  Rshift("Rshift") {
   
-  // Initialize constants
+  // Initialize constant signals
   const_max_sig.write(MAX_NN_DIGIT);
   const_1_sig.write(1);
   
-  /*** Module interconnection ***/
-  bonus_module.t0_new_sig(t0_new_reg_out_sig);
-  bonus_module.t1_new_sig(t1_new_reg_out_sig);
-  bonus_module.c_sig(c_reg_out_sig);
-  bonus_module.aLow_sig(aLow_reg_out_sig);
-  bonus_module.ready_sig(bonus_ready);
-  bonus_module.aLow_new_sig(bonus_out_sig);
+  // Start of module interconnection
+  bonus.t0_new_sig(t0_new_reg_out_sig);
+  bonus.t1_new_sig(t1_new_reg_out_sig);
+  bonus.c_sig(c_reg_out_sig);
+  bonus.aLow_sig(aLow_reg_out_sig);
+  bonus.ready_sig(bonus_ready);
+  bonus.aLow_new_sig(bonus_out_sig);
   
   controller.clock(clock);
   controller.hw_enable(hw_enable);
@@ -166,62 +163,5 @@ dh_hw::dh_hw(sc_module_name n)
   
   Rshift.in(mult_1_out_sig);
   Rshift.out(Rshift_out_sig);
+  // End of module interconnection
 }
-
-// void dh_hw::process_hw() {
-//   NN_DIGIT t[2] {0, 0}, u(0), v(0), t0_tmp(0), t0_new(0), t1_tmp0(0),
-//            t1_tmp1(0), t1_new(0);
-//   NN_HALF_DIGIT aLow(0), aLow_new(0);
-//   
-//   while (true) {
-//     if (ld_inputs.read() == true) {
-//       t[0] = from_sw0->read();
-//       t[1] = from_sw1->read();
-//       
-//       c_reg_out.write(from_sw2->read());
-//       wait(); // Need to wait for splitter outputs to be updated
-//       
-//       aLow = from_sw3->read();
-// 
-//       u = (NN_DIGIT)aLow * (NN_DIGIT)splitter_low_out_sig.read();
-//       v = (NN_DIGIT)aLow * (NN_DIGIT)splitter_high_out_sig.read();
-//     }
-//     
-//     if (ld_t0_tmp.read() == true) {
-//       t0_tmp = t[0] - u;
-//     }
-//     
-//     if (ld_t1_tmp0.read() == true) {
-//       if (t0_tmp > (MAX_NN_DIGIT - u)) {
-//         t1_tmp0 = t[1] - 1;
-//       } else {
-//         t1_tmp0 = t[1];
-//       }
-//     }
-//     
-//     if (ld_t0_new.read() == true) {
-//       t0_new = t0_tmp - TO_HIGH_HALF(v);
-//       t0_new_reg_out.write(t0_new);
-//     }
-//     
-//     if (ld_t1_tmp1.read() == true) {
-//       if (t0_new > (MAX_NN_DIGIT - TO_HIGH_HALF(v))) {
-//         t1_tmp1 = t1_tmp0 - 1;
-//       } else {
-//         t1_tmp1 = t1_tmp0;
-//       }
-//     }
-//     
-//     if (ld_t1_new.read() == true) {
-//       t1_new = t1_tmp1 - HIGH_HALF(v);
-//       t1_new_reg_out.write(t1_new);
-//     }
-//     
-//     if (ld_output.read() == true) {
-//       aLow_new = bonus_out_sig.read();
-//       to_sw->write(aLow_new);
-//     }
-//     
-//     wait();
-//   } // end while
-// } // end process_hw

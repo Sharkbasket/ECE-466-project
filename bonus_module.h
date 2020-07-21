@@ -1,16 +1,16 @@
-#ifndef BONUS_H
-#define BONUS_H
+#ifndef BONUS_MODULE_H
+#define BONUS_MODULE_H
 
 #include "systemc.h"
 #include "digit.h"
 
-SC_MODULE(bonus) {
+SC_MODULE(bonus_module) {
   sc_in<NN_DIGIT> t0_new_sig, t1_new_sig, c_sig;
   sc_in<NN_HALF_DIGIT> aLow_sig;
   sc_in<bool> ready_sig;
   sc_out<NN_HALF_DIGIT> aLow_new_sig;
   
-  SC_CTOR(bonus) {
+  SC_CTOR(bonus_module) {
     SC_METHOD(bonus_method);
     sensitive << ready_sig;
   }
@@ -28,9 +28,10 @@ SC_MODULE(bonus) {
         }
         aLow++;
       }
+      
       aLow_new_sig->write(aLow);
     }
   }
 };
 
-#endif // BONUS_H
+#endif // BONUS_MODULE_H
