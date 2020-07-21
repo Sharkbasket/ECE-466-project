@@ -473,9 +473,14 @@ NN_DIGIT c
   
   // Handshaking protocol
   hw_enable->write(true);
-  wait(); // Wait for assertion of hw_done
+  do {
+    wait();
+  } while (hw_done->read() == false);
+  
   hw_enable->write(false);
-  wait(); // Wait for de-assertion of hw_done
+  do {
+    wait();
+  } while (hw_done->read() == true);
   
 // This computation is now performed in hardware.
 /* Synchronization is done via blocking read/write 
