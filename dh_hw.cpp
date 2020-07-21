@@ -36,8 +36,8 @@ dh_hw::dh_hw(sc_module_name n)
   Lshift("Lshift"),
   Rshift("Rshift")
 {  
-  SC_THREAD(process_hw);
-  sensitive << clock.pos();
+//   SC_THREAD(process_hw);
+//   sensitive << clock.pos();
   
   /*** Module interconnection ***/
   bonus_module.t0_new_sig(t0_new_reg_out_sig);
