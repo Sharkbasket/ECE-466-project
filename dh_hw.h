@@ -102,8 +102,8 @@ SC_MODULE(dh_hw) {
   simple_reg<NN_HALF_DIGIT> aLow_reg;
   simple_reg<NN_HALF_DIGIT> aLow_new_reg;
   
-  multiplier<NN_DIGIT> mult_0;
-  multiplier<NN_DIGIT> mult_1;
+  multiplier mult_0;
+  multiplier mult_1;
   
   subtractor<NN_DIGIT> sub_0;
   subtractor<NN_DIGIT> sub_1;
@@ -116,8 +116,8 @@ SC_MODULE(dh_hw) {
   comparator<NN_DIGIT> cmp_0;
   comparator<NN_DIGIT> cmp_1;
   
-  multiplexer mux_0;
-  multiplexer mux_1;
+  multiplexer<NN_DIGIT> mux_0;
+  multiplexer<NN_DIGIT> mux_1;
   
   left_shifter Lshift;
   right_shifter Rshift;
