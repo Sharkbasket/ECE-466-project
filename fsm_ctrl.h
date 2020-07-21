@@ -13,8 +13,15 @@ SC_MODULE(fsm_ctrl) {
   // Ports
   sc_in_clk clock;
   sc_in<bool> hw_enable;
-  sc_out<bool> ld_inputs, ld_t0_tmp, ld_t1_tmp0, ld_t0_new, ld_t1_tmp1,
-               ld_t1_new, bonus_ready, ld_output, hw_done;
+  sc_out<bool> ld_inputs;
+  sc_out<bool> ld_t0_tmp;
+  sc_out<bool> ld_t1_tmp0;
+  sc_out<bool> ld_t0_new;
+  sc_out<bool> ld_t1_tmp1;
+  sc_out<bool> ld_t1_new;
+  sc_out<bool> bonus_ready;
+  sc_out<bool> ld_output;
+  sc_out<bool> hw_done;
   
   // Constructor
   fsm_ctrl(sc_module_name);
