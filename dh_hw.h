@@ -1,5 +1,5 @@
 #ifndef _DH_HW_H_
-#define _DH_HW_H_ 1
+#define _DH_HW_H_
 
 #include "systemc.h"
 #include "digit.h"

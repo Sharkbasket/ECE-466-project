@@ -20,12 +20,23 @@ SC_MODULE(fsm_ctrl) {
   
   // State definition
   enum State {
-    RESET, WAIT, INPUT, EXE_0, EXE_1, EXE_2, EXE_3, EXE_4, EXE_5, OUTPUT, DONE
+    RESET,
+    WAIT,
+    INPUT,
+    EXE_0,
+    EXE_1,
+    EXE_2,
+    EXE_3,
+    EXE_4,
+    EXE_5,
+    OUTPUT,
+    DONE
   };
   State state;
   
   // Constructor definition
   SC_HAS_PROCESS(fsm_ctrl);
+  
   fsm_ctrl(sc_module_name n) : sc_module(n), state(RESET) {
     SC_THREAD(fsm_process);
     sensitive << clock.pos();

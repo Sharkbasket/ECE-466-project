@@ -1,5 +1,3 @@
-#include "systemc.h"
-#include "digit.h"
 #include "dh_hw.h"
 
 SC_HAS_PROCESS(dh_hw);
